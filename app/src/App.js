@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
         <p>
-          Game Show App!
+          Game Show App! Test1
         </p>
         <GameShow/>
     </div>
