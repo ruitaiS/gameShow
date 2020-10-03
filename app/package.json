@@ -8,9 +8,11 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
     "bootstrap": "^3.4.1",
+    "draw-shape-reactjs": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-webcam": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
