@@ -1,6 +1,9 @@
 import React from 'react';
 // import './App.css';
-import GameShow from './Components/GameShow'
+import GameShow from './Components/GameShow';
+import ReactCamera from './Components/ReactCamera';
+
+
 import{
     Line,
     SteppedLine,
@@ -131,6 +134,7 @@ function App() {
         <DrawFigure/>
 
         <GameShow/>
+        <ReactCamera/>
     </div>
   );
 }
