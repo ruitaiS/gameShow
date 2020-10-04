@@ -9,8 +9,6 @@ function sendToFlask(img){
     xhr.addEventListener('load', () => {
       // update the state of the component with the result here
       alert(xhr.responseText);
-        json = xhr.responseText;
-        export {json};
 
     })
     // open the request with the verb and the url
