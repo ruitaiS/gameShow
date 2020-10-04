@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import './App.css';
 import GameShow from './Components/GameShow';
 import ReactCamera from './Components/ReactCamera';
@@ -44,8 +44,8 @@ function intersectsAt(p1,p2, p3, p4 ){
 
     let m1 = (p1[1] - p2[1]) / (p1[0] - p2[0]);
     let m2 = (p3[1] - p4[1]) / (p3[0] - p4[0]);
-    alert('m1: ' + m1);
-    alert('m2: ' + m2);
+    //alert('m1: ' + m1);
+    //alert('m2: ' + m2);
     
     
     let x1 = p1[0]; let y1 = p1[1];
@@ -54,9 +54,9 @@ function intersectsAt(p1,p2, p3, p4 ){
 
     let xInt = (m1*x1 - y1 - m2*x2 + y2) / (m1 - m2);
     //alert(m1*x1 - y1 - m2*x2 + y2);
-    alert('X: ' + xInt);
+    //alert('X: ' + xInt);
     let yInt = m1*(xInt - x1) + y1;
-    alert('Y: ' + yInt);
+    //alert('Y: ' + yInt);
 
     if (xInt < xMax && xInt > xMin && yInt < yMax && yInt > yMin){
         
@@ -187,10 +187,19 @@ function DrawFigure(){
 }       
 
 function App() {
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/time').then(res => res.json()).then(data => {
+      setCurrentTime(data.time);
+    });
+  }, []);
+
   return (
     <div className="App">
         <p>
-          Game Show App!
+          Game Show App!<br></br>
+          The current time is {currentTime}.
         </p>
 
         <DrawFigure/>
