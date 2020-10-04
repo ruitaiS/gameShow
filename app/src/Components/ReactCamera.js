@@ -1,27 +1,17 @@
 import React from "react";
 import Webcam from "react-webcam";
 
-/*
-function uploadFile(file) {
-  fetch('http://localhost:5000/time', {
-    // content-type header should not be specified!
-    method: 'POST',
-    body: file,
-  })
-    .then(response => response.json())
-    .then(success => {
-      // Do something with the successful response
-    })
-    .catch(error => console.log(error)
-  );
-}
-*/
+//let json = null;
+//export {json};
 
 function sendToFlask(img){
     let xhr = new XMLHttpRequest();
     xhr.addEventListener('load', () => {
       // update the state of the component with the result here
       alert(xhr.responseText);
+        json = xhr.responseText;
+        export {json};
+
     })
     // open the request with the verb and the url
     xhr.open('POST', 'http://localhost:5000/img');
