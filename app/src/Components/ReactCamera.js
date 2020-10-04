@@ -1,6 +1,34 @@
 import React from "react";
 import Webcam from "react-webcam";
 
+/*
+function uploadFile(file) {
+  fetch('http://localhost:5000/time', {
+    // content-type header should not be specified!
+    method: 'POST',
+    body: file,
+  })
+    .then(response => response.json())
+    .then(success => {
+      // Do something with the successful response
+    })
+    .catch(error => console.log(error)
+  );
+}
+*/
+
+function sendToFlask(img){
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+      // update the state of the component with the result here
+      alert(xhr.responseText);
+    })
+    // open the request with the verb and the url
+    xhr.open('POST', 'http://localhost:5000/img');
+    // send the request
+    xhr.send(img);     
+}
+
 function ReactCamera() {
     const videoConstraints = {
         width: 1280,
@@ -12,9 +40,17 @@ function ReactCamera() {
     const [imgSrc, setImgSrc] = React.useState(null);
 
     const capture = React.useCallback(() => {
+        //getScreenshot() is already base64!
         const imageSrc = webcamRef.current.getScreenshot();
+
+        //send to flask
+        sendToFlask(imageSrc);
+
         setImgSrc(imageSrc);
+
     }, [webcamRef, setImgSrc]);
+
+
 
         return (
 
