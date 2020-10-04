@@ -1,0 +1,30 @@
+frames.persons.landmarks
+
+Array of keypoints
+
+Line Segments:
+
+0, 21
+0, 23
+0,1
+1,2
+2,6
+2,12
+6,3
+3,13
+3,4
+4,5
+5,24
+5,22
+13,14
+14,15
+12,11
+11,10
+12,8
+8,7
+7,13
+
+8,9
+
+9 is the head
+18,20 is ear to ear
