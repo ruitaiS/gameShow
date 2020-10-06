@@ -61,7 +61,7 @@ function intersectsAt(p1,p2, p3, p4 ){
 
     if (xInt < xMax && xInt > xMin && yInt < yMax && yInt > yMin){
         
-        alert("Intersection at " + xInt + "," + yInt);
+        //alert("Intersection at " + xInt + "," + yInt);
         //return true;
         //alert('2' + m2);
         //alert(p3[1]);
@@ -106,6 +106,13 @@ function drawSegment(p1,p2){
 
     //Testing Intersects
     let intersection = intersectsAt([500,0],[501,1000],[joints[2*p1]*1000, joints[2*p1+1]*1000],[ joints[2*p2]*1000, joints[2*p2+1]*1000]);
+    if (intersection != null){
+        //alert("intersects!");
+        result.push(intersection
+        );
+    };
+
+    intersection = intersectsAt([0,500],[1000,500],[joints[2*p1]*1000, joints[2*p1+1]*1000],[ joints[2*p2]*1000, joints[2*p2+1]*1000]);
     if (intersection != null){
         //alert("intersects!");
         result.push(intersection

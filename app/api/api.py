@@ -1,5 +1,7 @@
 import time
+
 import base64
+
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from wrcloud.wrcloud import wrCloud
@@ -17,23 +19,29 @@ def get_current_time():
 @cross_origin()
 def processImg():
 
-    #imgdata = base64.b64decode(request.data)
-    #fileName = "img.jpg"
-    #with open(fileName, 'wb') as f:
-    #    f.write(imgdata)
+    print("Incoming: ")
+    print(request.data)
 
-    #this doesn't work
-    #encoded = base64.b64encode(open("file.png", "rb").read())
+    #Strip the first 23characters ('data:image/jpeg;base64,')
+    data = request.data[23:]    
 
-    imgdata = base64.b64decode(request.data)
+    #Decode Base64 from React; store as jpg locally
+    imgStr = base64.decodebytes(data)
+    #print(imgStr)
+    
+
     filename = 'img.jpg'
-    with open(filename, 'wb') as f:
-        f.write(imgdata)    
-
+    imgFile = open(filename, "wb")
+    imgFile.write(imgStr)
+    imgFile.close()
+    
+    #Connect to Wrnch, upload file
     wr = wrCloud(username='petershao', password='jEkcp8sq!qMYEEh')
-    print (wr.get_auth_token())
-    job_id = wr.submit_job('dancing.jpg', work_type=['annotated_media'], options={}, url=False)
-    print ("Job: " + job_id)
+    job_id = wr.submit_job('img.jpg', work_type=['annotated_media'], options={}, url=False)
+    #print (wr.get_auth_token())
+    print ("Job ID: " + job_id)
+
+    #Loop Status until processing Complete
     status = wr.get_job_status(job_id)
     while (status == 'Processing'):
         status = wr.get_job_status(job_id)
@@ -41,6 +49,5 @@ def processImg():
     status = wr.get_job_status(job_id)
     print ("Status: " + status)
 
-    #print("String: " + wr.get_result_as_string(job_id, work_type=''))
     return wr.get_result_as_string(job_id, work_type='')
     

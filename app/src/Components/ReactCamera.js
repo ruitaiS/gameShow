@@ -30,6 +30,7 @@ function ReactCamera() {
     const capture = React.useCallback(() => {
         //getScreenshot() is already base64!
         const imageSrc = webcamRef.current.getScreenshot();
+        console.log(imageSrc);
 
         //send to flask
         sendToFlask(imageSrc);
