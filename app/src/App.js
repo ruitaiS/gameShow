@@ -10,10 +10,9 @@ import{
     Rectangle
 } from 'draw-shape-reactjs';
 
-//import {json} from './Components/ReactCamera';
-
-
 function intersectsAt(p1,p2, p3, p4 ){
+    //TODO: special cases for vertical lines
+    //TODO: Figure out why alex's edits weren't working
 
     //Make sure that righttmost point comes first
     if (p1[0] < p2[0]){
@@ -27,14 +26,14 @@ function intersectsAt(p1,p2, p3, p4 ){
         p4 = temp;
     };
 
+    //Convert to fourth quadrant cartesian
     p1[1] = (-1)*p1[1];
     p2[1] = (-1)*p2[1];
     p3[1] = (-1)*p3[1];
     p4[1] = (-1)*p4[1];
 
-
-    //Remember special cases for vertical lines
-
+    //Set boundaries for intersection point
+    //Otherwise any two non-parallel lines would intersect
     let xSet = [p1[0], p2[0], p3[0], p4[0]].sort();
     let ySet = [p1[1], p2[1], p3[1], p4[1]].sort();
     let xMax = xSet[2];
@@ -43,16 +42,18 @@ function intersectsAt(p1,p2, p3, p4 ){
     let yMin = ySet[2];
     //alert('1' + xMax);
 
+    //Finding Slopes of two line segments
     let m1 = (p1[1] - p2[1]) / (p1[0] - p2[0]);
     let m2 = (p3[1] - p4[1]) / (p3[0] - p4[0]);
     //alert('m1: ' + m1);
     //alert('m2: ' + m2);
     
-    
+    //Setting x,y of a point on each segment
     let x1 = p1[0]; let y1 = p1[1];
     let x2 = p3[0]; let y2 = p3[1];
     //alert('3' + x1)
 
+    //Calculate coordinates of intersection
     let xInt = (m1*x1 - y1 - m2*x2 + y2) / (m1 - m2);
     //alert(m1*x1 - y1 - m2*x2 + y2);
     //alert('X: ' + xInt);
@@ -81,15 +82,11 @@ function intersectsAt(p1,p2, p3, p4 ){
         //alert('P4: ' + p4[0] + ',' + p4[1]);
 
         return(
+            //Draw circle at intersection point
             [<Circle center={[xInt,yInt]} radius={15}color='#FF0000' />,
-            //<Circle center={[p1[0],p1[1]]} radius={15}color='#FF0000' />,
-            //<Circle center={[p2[0],p2[1]]} radius={25}color='#FF0000' />,
-            //<Circle center={[p3[0],p3[1]]} radius={35}color='#FF0000' />,
-            //<Circle center={[p4[0],p4[1]]} radius={45}color='#FF0000' />
             ]
         );
     }else{
-        //return false;
         return null;
     };
 }
