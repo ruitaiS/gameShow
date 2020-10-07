@@ -22,7 +22,9 @@ After processing, WRNCH returns a JSON string containing an array of coordinates
 </p>
  The coordinates were unit normalized, meaning that they ranged in value from 0-1. This allowed us easily scale the image by multiplying the coordinates by a set constant (we went with 500).
 
-![JSON Joint Definitions](https://devportal.wrnch.ai/assets/j25_body_joints-4ef1dbefbe34c98952cc14df51e8074ebe3bbb1fed4bc53f66943e23451aa29c.png)
+<p align="center">
+    <img src="https://devportal.wrnch.ai/assets/j25_body_joints-4ef1dbefbe34c98952cc14df51e8074ebe3bbb1fed4bc53f66943e23451aa29c.png">
+</p>
 In addition, not all joints were connected. Using the above reference provided by the API documentation, we hard coded the indices of connected joints into an array. By iterating over this array, we were able to then draw line segments between connected joints and display the skeletal figure to the screen.
 
  
