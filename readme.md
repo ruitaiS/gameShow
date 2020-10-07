@@ -10,10 +10,10 @@ We used React on the front-end, and Flask for the back-end. Posture recognition 
 
 [//]: # TODO: List the libraries used
 
-### Posture Recognition:
+### Image Capture and API Request:
 The React-Camera component takes a picture via the user's webcam, and sends it to the Flask server via a POST request as a Base64 byte string. Flask then decodes the byte string back into an image, storing it locally before uploading it to WRNCH's servers for processing. 
 
-### JSON Parsing:
+### JSON Parsing and Displaying to Screen:
 
 After processing, WRNCH returns a JSON string containing an array of coordinates corresponding to different joints on the body. For indexes i = 0 to 25, the ith position contained the x coordinate while the i + 1 position contained the y coordinate.
 
@@ -27,7 +27,9 @@ After processing, WRNCH returns a JSON string containing an array of coordinates
 </p>
 In addition, not all joints were connected. Using the above reference provided by the API documentation, we hard coded the indices of connected joints into an array. By iterating over this array, we were able to then draw line segments between connected joints and display the skeletal figure to the screen.
 
- 
-
 ### Collision Detection:
+Both the figure and the silhouette shape consist of line segments, so collision detection was a simple matter of solving for the intersection of two lines. There were however two caveats:
 
+First, the coordinate systems for the webpage and the JSON data have the positive Y direction facing down, but equations for the slope of a line assume that Y is positive in the upward direction. To overcome this, we inverted the Y values of each segment prior to calculating the intersection point, and again prior to displaying them.
+
+Second, *any* two non-parallel lines will eventually intersect, so we needed to set a boundary within which an intersection must occur.
