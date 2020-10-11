@@ -10,6 +10,21 @@ import{
     Rectangle
 } from 'draw-shape-reactjs';
 
+
+/*
+function sendToFlask(img){
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+      // update the state of the component with the result here
+      alert(xhr.responseText);
+
+    })
+    // open the request with the verb and the url
+    xhr.open('POST', 'http://localhost:5000/img');
+    // send the request
+    xhr.send(img);     
+}*/
+
 function intersectsAt(p1,p2, p3, p4 ){
     //TODO: special cases for vertical lines
     //TODO: Figure out why alex's edits weren't working
@@ -192,11 +207,23 @@ function DrawFigure(){
 
     result.push(intersectsAt([500, 0],[510, 1000],[0, 500],[1000, 501]));
     return(<div>{result}</div>);
+}
+
+function sendToFlask(img){
+    let xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+      // update the state of the component with the result here
+      alert(xhr.responseText);
+
+    })
+    // open the request with the verb and the url
+    xhr.open('POST', 'http://localhost:5000/img');
+    // send the request
+    xhr.send(img);     
 }       
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
-
   useEffect(() => {
     fetch('http://localhost:5000/time').then(res => res.json()).then(data => {
       setCurrentTime(data.time);
@@ -213,7 +240,7 @@ function App() {
         <DrawFigure/>
 
         <GameShow/>
-        <ReactCamera/>
+        <ReactCamera callBack={sendToFlask}/>
     </div>
   );
 }

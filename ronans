@@ -1,12 +1,3 @@
-import React from "react";
-import Webcam from "react-webcam";
-
-//let json = null;
-//export {json};
-
-class ReactCamera extends React.Component {
-
-    render(){
 const videoConstraints = {
         width: 1280,
         height: 720,
@@ -53,9 +44,3 @@ const videoConstraints = {
                 )}
             </div>
         );
-
-    }
-
-}
-export default ReactCamera;
-
