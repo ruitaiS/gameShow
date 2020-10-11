@@ -1,12 +1,8 @@
 import React from "react";
 import Webcam from "react-webcam";
 
-//let json = null;
-//export {json};
+function ReactCamera(props){
 
-class ReactCamera extends React.Component {
-
-    render(){
 const videoConstraints = {
         width: 1280,
         height: 720,
@@ -21,8 +17,8 @@ const videoConstraints = {
         const imageSrc = webcamRef.current.getScreenshot();
         console.log(imageSrc);
 
-        //send to flask
-        this.props.callBack(imageSrc);
+        //Send data back to App.js so it can send to Flask
+        props.callBack(imageSrc);
 
         setImgSrc(imageSrc);
 
@@ -53,9 +49,7 @@ const videoConstraints = {
                 )}
             </div>
         );
-
-    }
-
 }
+
 export default ReactCamera;
 
