@@ -10,21 +10,6 @@ import{
     Rectangle
 } from 'draw-shape-reactjs';
 
-
-/*
-function sendToFlask(img){
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', () => {
-      // update the state of the component with the result here
-      alert(xhr.responseText);
-
-    })
-    // open the request with the verb and the url
-    xhr.open('POST', 'http://localhost:5000/img');
-    // send the request
-    xhr.send(img);     
-}*/
-
 function intersectsAt(p1,p2, p3, p4 ){
     //TODO: special cases for vertical lines
     //TODO: Figure out why alex's edits weren't working
@@ -76,13 +61,6 @@ function intersectsAt(p1,p2, p3, p4 ){
     //alert('Y: ' + yInt);
 
     if (xInt < xMax && xInt > xMin && yInt < yMax && yInt > yMin){
-        
-        //alert("Intersection at " + xInt + "," + yInt);
-        //return true;
-        //alert('2' + m2);
-        //alert(p3[1]);
-        //alert(p4[1]);
-        //return [xInt, yInt, p1, p2, p3, p4];
 
         //Invert the Y back
         p1[1] = (-1)*p1[1];
@@ -90,11 +68,6 @@ function intersectsAt(p1,p2, p3, p4 ){
         p3[1] = (-1)*p3[1];
         p4[1] = (-1)*p4[1];
         yInt = (-1)*yInt;
-
-        //alert('P1: ' + p1[0] + ',' + p1[1]);
-        //alert('P2: ' + p2[0] + ',' + p2[1]);
-        //alert('P3: ' + p3[0] + ',' + p3[1]);
-        //alert('P4: ' + p4[0] + ',' + p4[1]);
 
         return(
             //Draw circle at intersection point
@@ -182,7 +155,7 @@ function DrawFigure(){
     //for (let i = 0; i < 10; i += 2){
         //alert(i);
         result.push(
-            drawSegment(segments[i], segments[i +1])
+            drawSegments(segments[i], segments[i +1])
         );
     };
 
