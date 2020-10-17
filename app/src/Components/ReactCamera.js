@@ -4,6 +4,9 @@ import Webcam from "react-webcam";
 let res = [];
 
 function ReactCamera(props){
+if (res.length == 2){
+    res = [];
+};
 
 const videoConstraints = {
         width: 1280,
