@@ -1,12 +1,7 @@
 import React from "react";
 import Webcam from "react-webcam";
 
-let res = [];
-
 function ReactCamera(props){
-if (res.length == 2){
-    res = [];
-};
 
 const videoConstraints = {
         width: 1280,
@@ -16,8 +11,6 @@ const videoConstraints = {
 
     const webcamRef = React.useRef(null);
     const [imgSrc, setImgSrc] = React.useState(null);
-    
-    alert("1Res Length " + res.length);
 
     
     const capture = React.useCallback(() => {
@@ -26,16 +19,14 @@ const videoConstraints = {
         console.log(imageSrc);
 
         //Send data back to App.js so it can send to Flask
-        alert("Capture");
-        res.push(props.callBack(imageSrc));
-        alert("2Res Length " + res.length);
+        props.sendToFlask(imageSrc);
 
         setImgSrc(imageSrc);
 
     }, [webcamRef, setImgSrc]);
 
 
-        res.push(
+        return(
             <div>
                 <head>
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous"/>
@@ -62,9 +53,6 @@ const videoConstraints = {
                 )}
             </div>
         );
-        alert("Returning Res");
-        alert("3Res Length " + res.length);
-        return res;
 }
 
 export default ReactCamera;

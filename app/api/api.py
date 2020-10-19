@@ -1,7 +1,5 @@
 import time
-
 import base64
-
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 from wrcloud.wrcloud import wrCloud
@@ -18,18 +16,8 @@ def get_current_time():
 @app.route('/img', methods=['POST'])
 @cross_origin()
 def processImg():
-
-    print("Incoming: ")
-    print(request.data)
-
-    #Strip the first 23characters ('data:image/jpeg;base64,')
-    data = request.data[23:]    
-
     #Decode Base64 from React; store as jpg locally
-    imgStr = base64.decodebytes(data)
-    #print(imgStr)
-    
-
+    imgStr = base64.decodestring(request.data)
     filename = 'img.jpg'
     imgFile = open(filename, "wb")
     imgFile.write(imgStr)
@@ -38,7 +26,7 @@ def processImg():
     #Connect to Wrnch, upload file
     wr = wrCloud(username='petershao', password='jEkcp8sq!qMYEEh')
     job_id = wr.submit_job('img.jpg', work_type=['annotated_media'], options={}, url=False)
-    #print (wr.get_auth_token())
+    print (wr.get_auth_token())
     print ("Job ID: " + job_id)
 
     #Loop Status until processing Complete
@@ -49,5 +37,6 @@ def processImg():
     status = wr.get_job_status(job_id)
     print ("Status: " + status)
 
+    print(wr.get_result_as_string(job_id, work_type='')
     return wr.get_result_as_string(job_id, work_type='')
     
