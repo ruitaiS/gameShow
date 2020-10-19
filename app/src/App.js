@@ -30,11 +30,8 @@ class Figure extends React.Component{
         };
         return output;
     }
-
     render(){
-        return (                
-                <div>{this.drawFigure()}</div>
-        );
+        return (<div>{this.drawFigure()}</div>);
     }
 }
 
@@ -48,10 +45,11 @@ class Game extends React.Component{
             //Pairs of connected indices in JSON array
             segments: [0,21, 0,23, 0,1, 1,2, 2,6, 2,12, 6,3, 3,13, 3,4, 4,5, 5,24, 5,22, 13,14, 14,15, 12,11, 11,10, 12,8, 8,7, 7,13, 8,9, 18,20],
 
-            //TODO Figure out how to properly implement this
+            //TODO Implement Shapes
             shapes: [0,1,2,3,4,5,6,7,8,9,10],
             shapeIndex: 0,
         };
+
     }
 
     updateJoints(str){
@@ -62,13 +60,18 @@ class Game extends React.Component{
         this.setState({shapeIndex: Math.floor((Math.random() * this.state.shapes.length))});
     }
 
+    //TODO: Fix this so it's actually updating the joints!
     sendToFlask(img){
+
+        //Current hunch is that "this" doesn't reference the figure when the function is passed as a prop
+        //I think it references the reactcamera...
+
         let xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', () => this.updateJoints(xhr.responseText));
         // open the request with the verb and the url
         xhr.open('POST', 'http://localhost:5000/img');
         // send the request
         xhr.send(img);
-        this.setState({joints: JSON.parse(xhr.responseText).frames[0].persons[0].pose2d.joints});
     }  
 
     render(){

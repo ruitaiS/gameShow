@@ -18,7 +18,7 @@ const videoConstraints = {
         const imageSrc = webcamRef.current.getScreenshot();
         console.log(imageSrc);
 
-        //Send data back to App.js so it can send to Flask
+        //Call sendToFlask method from within App.js
         props.sendToFlask(imageSrc);
 
         setImgSrc(imageSrc);
@@ -32,7 +32,7 @@ const videoConstraints = {
                     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossOrigin="anonymous"/>
                 </head>
 
-                <div style={{position: 'absolute', left: '50%', top: '50%',transform: 'translate(-50%, -50%)'}}>
+                <div style={{position: 'absolute', left: '50%', top: '30%',transform: 'translate(-50%, -50%)'}}>
                 
                 <Webcam
                 videoConstraints={videoConstraints}
