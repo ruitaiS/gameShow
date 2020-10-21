@@ -32,6 +32,16 @@ class Figure extends React.Component{
                 );
             };
         };
+
+        //Draw Boundary Box (Testing Only)
+        //(0,0) -> (1,0)
+        output.push(drawLine(xOffset, yOffset, scale + xOffset, yOffset));
+        //(0,0) -> (0,1)
+        output.push(drawLine(xOffset, yOffset, xOffset, scale + yOffset));
+        //(1,0) -> (1,1)
+        output.push(drawLine(scale + xOffset, yOffset, scale + xOffset, scale + yOffset));
+        //(0,1) -> (1,1)
+        output.push(drawLine(xOffset, scale + yOffset, scale + xOffset, scale + yOffset));
         return output;
     }
     render(){
