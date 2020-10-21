@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 // import './App.css';
 import GameShow from './Components/GameShow';
 import ReactCamera from './Components/ReactCamera';
-import Line from 'draw-shape-reactjs';
-
+import {Line} from 'draw-shape-reactjs';
 
 function drawLine(x1, y1, x2, y2){
     return(
