@@ -12,15 +12,25 @@ function drawLine(x1, y1, x2, y2){
 
 class Figure extends React.Component{
     drawFigure(){
+
+        //Can put these as parameters later if needed
+        let scale = 1000;
+        let yOffset = 0;
+        let xOffset = 0;
+
         let output = [];        
         for (let i = 0; i < this.props.segments.length + 1; i += 2){
-            output.push(
-                drawLine(this.props.joints[2*this.props.segments[i]]*1000,
-                    this.props.joints[2*this.props.segments[i]+1]*1000,
-                    this.props.joints[2*this.props.segments[i+1]]*1000,
-                    this.props.joints[2*this.props.segments[i+1]+1]*1000
-                )
-            );
+            let x1 = this.props.joints[2*this.props.segments[i]];
+            let y1 = this.props.joints[2*this.props.segments[i]+1];
+            let x2 = this.props.joints[2*this.props.segments[i+1]];
+            let y2 = this.props.joints[2*this.props.segments[i+1]+1];
+
+            if (x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0){
+                output.push(
+                    drawLine(x1*scale+xOffset, y1*scale+yOffset,
+                        x2*scale+xOffset, y2*scale+yOffset)
+                );
+            };
         };
         return output;
     }
