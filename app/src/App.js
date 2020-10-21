@@ -2,21 +2,12 @@ import React, {useState, useEffect} from 'react';
 // import './App.css';
 import GameShow from './Components/GameShow';
 import ReactCamera from './Components/ReactCamera';
-import{
-    Line,
-    SteppedLine,
-    PolyLine,
-    Circle,
-    Rectangle
-} from 'draw-shape-reactjs';
+import Line from 'draw-shape-reactjs';
+
 
 function drawLine(x1, y1, x2, y2){
     return(
-        <Line
-            from={[x1, y1]}
-            to={[x2, y2]}
-            color='#1DBFE7'
-        />
+        <Line from={[x1, y1]} to={[x2, y2]} color='#1DBFE7'/>
     );
 }
 
@@ -25,7 +16,11 @@ class Figure extends React.Component{
         let output = [];        
         for (let i = 0; i < this.props.segments.length + 1; i += 2){
             output.push(
-                drawLine(this.props.joints[2*this.props.segments[i]]*1000, this.props.joints[2*this.props.segments[i]+1]*1000, this.props.joints[2*this.props.segments[i+1]]*1000, this.props.joints[2*this.props.segments[i+1]+1]*1000)
+                drawLine(this.props.joints[2*this.props.segments[i]]*1000,
+                    this.props.joints[2*this.props.segments[i]+1]*1000,
+                    this.props.joints[2*this.props.segments[i+1]]*1000,
+                    this.props.joints[2*this.props.segments[i+1]+1]*1000
+                )
             );
         };
         return output;
@@ -38,11 +33,8 @@ class Figure extends React.Component{
 class Game extends React.Component{
     constructor(props){
         super(props);
-
-        //Trying to ensure sendToFlask always has proper 'this' reference
-        //But still not working...
+        //sTF function is sent as a parameter to ReactCamera, so we need to ensure "this" is bound to the Game instance
         this.sendToFlask = this.sendToFlask.bind(this);
-        //this.testFunc = this.testFunc.bind(this);
 
         this.state = {
             //Init with Default JSON Placeholder
