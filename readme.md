@@ -50,3 +50,5 @@ The solution which we found worked in the end was to sort the x (or y) values of
 <!-- Also maybe write it better -->
 
 ### Concusion / Further Exploration:
+
+<p align="center"><img src="yay.png"></p>
