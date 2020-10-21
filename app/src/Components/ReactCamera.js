@@ -4,8 +4,13 @@ import Webcam from "react-webcam";
 function ReactCamera(props){
 
 const videoConstraints = {
-        width: 1280,
-        height: 720,
+        //width: 1280,
+        //height: 720,
+
+        //wrnch uses a square
+        //Make sure the width/height are the same as "scale" in drawFigure in App
+        width: 480,
+        height: 480,
         facingMode: "user"
     };
 
@@ -36,8 +41,7 @@ const videoConstraints = {
                 
                 <Webcam
                 videoConstraints={videoConstraints}
-                width={480}
-                height={720}
+
 
                 audio={false}
                 ref={webcamRef}

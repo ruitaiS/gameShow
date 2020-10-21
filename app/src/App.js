@@ -14,7 +14,7 @@ class Figure extends React.Component{
     drawFigure(){
 
         //Can put these as parameters later if needed
-        let scale = 1000;
+        let scale = 480;
         let yOffset = 0;
         let xOffset = 0;
 
