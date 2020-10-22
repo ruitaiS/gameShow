@@ -18,3 +18,17 @@ code {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.webcam {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.webcamBtn{
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+}
