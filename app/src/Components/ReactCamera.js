@@ -17,8 +17,6 @@ const videoConstraints = {
 
     const webcamRef = React.useRef(null);
     const [imgSrc, setImgSrc] = React.useState(null);
-
-    
     const capture = React.useCallback(() => {
         //getScreenshot() is already base64!
         const imageSrc = webcamRef.current.getScreenshot();

@@ -11,12 +11,13 @@ function drawLine(x1, y1, x2, y2){
 }
 
 class Figure extends React.Component{
-    drawFigure(){
+    drawFigure(scale, xOffset, yOffset){
+        //let scale = 480;
 
-        //Can put these as parameters later if needed
-        let scale = 480;
-        let yOffset = 0;
-        let xOffset = 0;
+        //Origin is the top-left corner
+        //(-Scale/2) + Offset ensures proper centering
+        let yOrigin = -scale/2 + xOffset;
+        let xOrigin = -scale/2 + yOffset;
 
         let output = [];        
         for (let i = 0; i < this.props.segments.length + 1; i += 2){
@@ -27,25 +28,33 @@ class Figure extends React.Component{
 
             if (x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0){
                 output.push(
-                    drawLine(x1*scale+xOffset, y1*scale+yOffset,
-                        x2*scale+xOffset, y2*scale+yOffset)
+                    drawLine(x1*scale+xOrigin, y1*scale+yOrigin,
+                        x2*scale+xOrigin, y2*scale+yOrigin)
                 );
             };
         };
 
-        //Draw Boundary Box (Testing Only)
+        //Draw Boundary Box
         //(0,0) -> (1,0)
-        output.push(drawLine(xOffset, yOffset, scale + xOffset, yOffset));
+        output.push(drawLine(xOrigin, yOrigin, scale + xOrigin, yOrigin));
         //(0,0) -> (0,1)
-        output.push(drawLine(xOffset, yOffset, xOffset, scale + yOffset));
+        output.push(drawLine(xOrigin, yOrigin, xOrigin, scale + yOrigin));
         //(1,0) -> (1,1)
-        output.push(drawLine(scale + xOffset, yOffset, scale + xOffset, scale + yOffset));
+        output.push(drawLine(scale + xOrigin, yOrigin, scale + xOrigin, scale + yOrigin));
         //(0,1) -> (1,1)
-        output.push(drawLine(xOffset, scale + yOffset, scale + xOffset, scale + yOffset));
+        output.push(drawLine(xOrigin, scale + yOrigin, scale + xOrigin, scale + yOrigin));
         return output;
     }
+
+    //Temporarily render a copy in the top-left corner (along with webcam snap)
+    //TODO: after timer, remove this
     render(){
-        return (<div>{this.drawFigure()}</div>);
+        return (
+            <div>
+                <div class ="overlay">{this.drawFigure(480, 0,0)}</div>
+                <div>{this.drawFigure(480,240,240)}</div>
+            </div>            
+        );
     }
 }
 
