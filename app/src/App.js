@@ -4,9 +4,9 @@ import GameShow from './Components/GameShow';
 import ReactCamera from './Components/ReactCamera';
 import {Line} from 'draw-shape-reactjs';
 
-function drawLine(x1, y1, x2, y2){
+function drawLine(color, x1, y1, x2, y2){
     return(
-        <Line from={[x1, y1]} to={[x2, y2]} color='#1DBFE7'/>
+        <Line from={[x1, y1]} to={[x2, y2]} color={color}/>
     );
 }
 
@@ -28,7 +28,7 @@ class Overlay extends React.Component{
 
             if (x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0){
                 output.push(
-                    drawLine(x1*scale+xOrigin, y1*scale+yOrigin,
+                    drawLine('#1DBFE7', x1*scale+xOrigin, y1*scale+yOrigin,
                         x2*scale+xOrigin, y2*scale+yOrigin)
                 );
             };
@@ -36,13 +36,13 @@ class Overlay extends React.Component{
 
         //Draw Boundary Box
         //(0,0) -> (1,0)
-        output.push(drawLine(xOrigin, yOrigin, scale + xOrigin, yOrigin));
+        output.push(drawLine('#e71d1d', xOrigin, yOrigin, scale + xOrigin, yOrigin));
         //(0,0) -> (0,1)
-        output.push(drawLine(xOrigin, yOrigin, xOrigin, scale + yOrigin));
+        output.push(drawLine('#e71d1d', xOrigin, yOrigin, xOrigin, scale + yOrigin));
         //(1,0) -> (1,1)
-        output.push(drawLine(scale + xOrigin, yOrigin, scale + xOrigin, scale + yOrigin));
+        output.push(drawLine('#e71d1d', scale + xOrigin, yOrigin, scale + xOrigin, scale + yOrigin));
         //(0,1) -> (1,1)
-        output.push(drawLine(xOrigin, scale + yOrigin, scale + xOrigin, scale + yOrigin));
+        output.push(drawLine('#e71d1d', xOrigin, scale + yOrigin, scale + xOrigin, scale + yOrigin));
         return output;
     }
 
@@ -105,8 +105,9 @@ class Game extends React.Component{
             <Overlay joints={this.state.joints} segments={this.state.segments} />
             <ReactCamera sendToFlask={this.sendToFlask}/>
             <div class = "centered">
-                <button onClick={()=>this.nextShape()}>Pick Shape</button>
+                <button onClick={()=>this.nextShape()}>Next Shape</button>
                 <button onClick={()=> alert(this.state.shapes[this.state.shapeIndex])}>Show Shape</button>
+                <button onClick={()=>this.setState({joints: new Array(24)})}>Clear Overlay</button>
             </div>
             </div>
         );
