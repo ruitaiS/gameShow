@@ -4,13 +4,39 @@ import GameShow from './Components/GameShow';
 import ReactCamera from './Components/ReactCamera';
 import {Line} from 'draw-shape-reactjs';
 
+class Point{
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+}
+
 function drawLine(color, x1, y1, x2, y2){
     return(
         <Line from={[x1, y1]} to={[x2, y2]} color={color}/>
     );
 }
 
+function drawLine(color, p1, p2){
+    return(
+        <Line from={[p1.x, p1.y]} to={[p2.x, p2.y]} color={color}/>
+    );
+}
+
 class Overlay extends React.Component{
+
+    drawImage(points){
+        for (let i = 0; i < points.length; i++){
+            if (i == points.length - 1){
+                drawLine("green", points[i], points[0]); 
+            }else{
+                drawLine("green", points[i], points[i + 1]);
+            }
+        }
+
+    }
+
+
     drawFigure(scale, xOffset, yOffset){
         //let scale = 480;
 
