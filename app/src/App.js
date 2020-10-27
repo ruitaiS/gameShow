@@ -9,6 +9,11 @@ class Point{
         this.x = x;
         this.y = y;
     }
+
+    applyTransform(scale, xOffset, yOffset){
+        this.x = this.x * scale + xOffset;
+        this.y = this.y * scale + yOffset;
+    }
 }
 
 function drawLine(color, x1, y1, x2, y2){
@@ -17,7 +22,7 @@ function drawLine(color, x1, y1, x2, y2){
     );
 }
 
-function drawLine(color, p1, p2){
+function drawLinePts(color, p1, p2){
     return(
         <Line from={[p1.x, p1.y]} to={[p2.x, p2.y]} color={color}/>
     );
@@ -25,12 +30,12 @@ function drawLine(color, p1, p2){
 
 class Overlay extends React.Component{
 
-    drawImage(points){
+    drawShape(points){
         for (let i = 0; i < points.length; i++){
             if (i == points.length - 1){
-                drawLine("green", points[i], points[0]); 
+                drawLinePts("green", points[i], points[0]); 
             }else{
-                drawLine("green", points[i], points[i + 1]);
+                drawLinePts("green", points[i], points[i + 1]);
             }
         }
 
@@ -42,20 +47,20 @@ class Overlay extends React.Component{
 
         //Origin is the top-left corner
         //(-Scale/2) + Offset ensures proper centering
+        //TODO: These should be accessible class-wide (not sure how to do that w/o state, which is kind of a hassle)
         let yOrigin = -scale/2 + xOffset;
         let xOrigin = -scale/2 + yOffset;
 
         let output = [];        
         for (let i = 0; i < this.props.segments.length + 1; i += 2){
-            let x1 = this.props.joints[2*this.props.segments[i]];
-            let y1 = this.props.joints[2*this.props.segments[i]+1];
-            let x2 = this.props.joints[2*this.props.segments[i+1]];
-            let y2 = this.props.joints[2*this.props.segments[i+1]+1];
+            let p1 = new Point(this.props.joints[2*this.props.segments[i]],this.props.joints[2*this.props.segments[i]+1]);
+            let p2 = new Point(this.props.joints[2*this.props.segments[i+1]],this.props.joints[2*this.props.segments[i+1]+1]);
 
-            if (x1 > 0 && y1 > 0 && x2 > 0 && y2 > 0){
+            if (p1.x > 0 && p1.y > 0 && p2.x > 0 && p2.y > 0){
+                p1.applyTransform(scale, xOrigin);
+                p2.applyTransform(scale, yOrigin);
                 output.push(
-                    drawLine('#1DBFE7', x1*scale+xOrigin, y1*scale+yOrigin,
-                        x2*scale+xOrigin, y2*scale+yOrigin)
+                    drawLinePts('#1DBFE7', p1, p2)
                 );
             };
         };
