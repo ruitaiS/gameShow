@@ -14,6 +14,26 @@ class Point{
         this.x = this.x * scale + xOffset;
         this.y = this.y * scale + yOffset;
     }
+
+    toStr(){
+        return (this.x + "," + this.y);
+    }
+}
+
+class Shape{
+    constructor(Points){
+        this.Points = Points;
+    }
+
+    draw(){
+
+    }
+
+    toStr(){
+
+
+    }
+
 }
 
 function drawLine(color, x1, y1, x2, y2){
@@ -28,18 +48,37 @@ function drawLinePts(color, p1, p2){
     );
 }
 
-class Overlay extends React.Component{
 
+
+class Overlay extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            //TODO: Fill With 
+        }
+    }
+
+    //TODO: Put this into shapes
+    //This is really sloppy, but just make sure it works first then refactor
     drawShape(points){
+        let res = [];
+
         for (let i = 0; i < points.length; i++){
             if (i == points.length - 1){
-                drawLinePts("green", points[i], points[0]); 
+                //alert(points[i].toStr());
+                //alert(points[0].toStr());
+                res.push(drawLinePts("#e71d1d", points[i], points[0])); 
             }else{
-                drawLinePts("green", points[i], points[i + 1]);
+                //alert(points[i].toStr());
+                //alert(points[i+1].toStr());
+                res.push(drawLinePts("#e71d1d", points[i], points[i + 1]));
             }
-        }
+        };
 
+        return res;
     }
+
+
 
 
     drawFigure(scale, xOffset, yOffset){
@@ -74,6 +113,9 @@ class Overlay extends React.Component{
         output.push(drawLine('#e71d1d', scale + xOrigin, yOrigin, scale + xOrigin, scale + yOrigin));
         //(0,1) -> (1,1)
         output.push(drawLine('#e71d1d', xOrigin, scale + yOrigin, scale + xOrigin, scale + yOrigin));
+
+        output.push(this.drawShape(this.props.shape));
+
         return output;
     }
 
@@ -102,8 +144,13 @@ class Game extends React.Component{
             //Pairs of connected indices in JSON array
             segments: [0,21, 0,23, 0,1, 1,2, 2,6, 2,12, 6,3, 3,13, 3,4, 4,5, 5,24, 5,22, 13,14, 14,15, 12,11, 11,10, 12,8, 8,7, 7,13, 8,9, 18,20],
 
-            //TODO Implement Shapes
-            shapes: [0,1,2,3,4,5,6,7,8,9,10],
+            //TODO Implement Shapes properly
+            //Abstract out the transformations
+            shapes: [
+                [new Point(0.3*480,0), new Point(0.7*480,0), new Point(0.7*480,480), new Point(0.3*480,1*480)],
+                [new Point(0,1*480), new Point(0.5*480,0.5*480), new Point(1*480,1*480)],
+                [new Point(0,0.5*480), new Point(1*480, 0.5*480), new Point(1*480,1*480), new Point(0,1*480)]
+            ],
             shapeIndex: 0,
         };
 
@@ -118,7 +165,6 @@ class Game extends React.Component{
     }
 
     sendToFlask(img){
-
         let xhr = new XMLHttpRequest();
         xhr.addEventListener('load', () => {
             this.updateJoints(xhr.responseText);
@@ -130,14 +176,12 @@ class Game extends React.Component{
     }  
 
     render(){
-        //TODO: Figure out how to make this prettier / Centered Properly
         return(
             <div>
-            <Overlay joints={this.state.joints} segments={this.state.segments} />
+            <Overlay joints={this.state.joints} segments={this.state.segments} shape={this.state.shapes[this.state.shapeIndex]}/>
             <ReactCamera sendToFlask={this.sendToFlask}/>
             <div class = "centered">
                 <button onClick={()=>this.nextShape()}>Next Shape</button>
-                <button onClick={()=> alert(this.state.shapes[this.state.shapeIndex])}>Show Shape</button>
                 <button onClick={()=>this.setState({joints: new Array(24)})}>Clear Overlay</button>
             </div>
             </div>
