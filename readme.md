@@ -49,6 +49,6 @@ The solution which we found worked in the end was to sort the x (or y) values of
 <!-- Diagram for the proof -->
 <!-- Also maybe write it better -->
 
-### Concusion / Further Exploration:
+### Concusion:
 
 <p align="center"><img src="yay.png"></p>

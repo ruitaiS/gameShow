@@ -57,8 +57,8 @@ class Overlay extends React.Component{
             let p2 = new Point(this.props.joints[2*this.props.segments[i+1]],this.props.joints[2*this.props.segments[i+1]+1]);
 
             if (p1.x > 0 && p1.y > 0 && p2.x > 0 && p2.y > 0){
-                p1.applyTransform(scale, xOrigin);
-                p2.applyTransform(scale, yOrigin);
+                p1.applyTransform(scale, xOrigin, yOrigin);
+                p2.applyTransform(scale, xOrigin, yOrigin);
                 output.push(
                     drawLinePts('#1DBFE7', p1, p2)
                 );
