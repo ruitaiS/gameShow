@@ -5,8 +5,6 @@ For the 2020 McGill AI Society (MAIS) Hackathon, we ([Alex](https://github.com/a
 ## NOTE:
 The trial license for the WRNCH Computer Vision API ended a month after the hackathon, so unfortunately there is no live version of this project.
 
-```
-
 ## Implementation Details:
 
 ### Tech Stack:
