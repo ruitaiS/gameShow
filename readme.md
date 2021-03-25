@@ -2,12 +2,8 @@
 
 For the 2020 McGill AI Society (MAIS) Hackathon, we ([Alex](https://github.com/allu5662), [Micaela](https://github.com/mgraiver), [Ronan](https://github.com/RonanAlmeida), and [Ruitai](https://github.com/ruitaiS)) decided to make a virtual version of this [Japanese Game Show](https://youtu.be/6ioiMXKpHxI)
 
-## Dependencies:
-<!--details on what packages to install to get it running -->
-```
-npm install react
-npm install draw-shape-reactjs
-npm install react-webcam
+## NOTE:
+The trial license for the WRNCH Computer Vision API ended a month after the hackathon, so unfortunately there is no live version of this project.
 
 ```
 
