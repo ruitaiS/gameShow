@@ -13,7 +13,7 @@ We used React on the front-end, and Flask for the back-end. Posture recognition 
 <!-- TODO: List the libraries used -->
 
 ### Image Capture and API Request:
-The React-Camera component takes a picture using the user's webcam, and sends it to the Flask server via a POST request as a Base64 byte string. Flask then decodes the byte string back into an image, storing it locally before uploading it to WRNCH's servers for processing. 
+The React-Camera component takes a picture using the player's webcam, and sends it to the Flask server via a POST request as a Base64 byte string. Flask then decodes the byte string back into an image, storing it locally before uploading it to WRNCH's servers for processing. 
 
 ### JSON Parsing and Displaying to Screen:
 
