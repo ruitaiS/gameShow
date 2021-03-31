@@ -38,7 +38,7 @@ Second, *any* two non-parallel lines will eventually intersect, so we needed to 
 
 <!-- Image describing the false collisions -->
 
-The solution which we found in the end was to sort the x (or y) values of the four points, then take the inner two as the maximum and minimum x (or y) bounds for detecting an intersection. A simple proof for this is as follows: Say we project both line segments onto the X axis by keeping the x values but setting the y values of each point to 0. The point of intersection between the two segments, if it exists, has to exist in the area of overlap between the two projections. The x values of the overlapping area would be the innermost two x values after sorting.
+The solution we used in the end was to sort the x (or y) values of the four points, then take the inner two as the maximum and minimum x (or y) bounds for detecting an intersection. A simple proof for this is as follows: Say we project both line segments onto the X axis by keeping the x values but setting the y values of each point to 0. The point of intersection between the two segments, if it exists, has to exist in the area of overlap between the two projections. The x values of the overlapping area would be the innermost two x values after sorting.
 
 <!-- Diagram for the proof -->
 <!-- Also maybe write it better -->
